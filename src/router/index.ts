@@ -6,6 +6,7 @@ import LegalNoticeView from '../views/LegalNoticeView.vue'
 import BookingView from '../views/BookingView.vue'
 import BookedView from '../views/BookedView.vue'
 import NoSpaceView from '../views/NoSpaceView.vue'
+import GenericThanksView from '../views/GenericThanksView.vue'
 
 import 'vue-router'
 
@@ -31,14 +32,14 @@ const router = createRouter({
       name: 'funnel',
       component: FunnelView,
       meta: {
-        title: 'EAT | Transforma el almuerzo de tu equipo',
+        title: 'REMODELA | Javier Aguilar',
         description:
-          'Transformamos tu flujo alimentario con el método Corporate Food Flow. Un solo equipo planifica y ejecuta todo el proceso.',
-        canonical: 'https://eat.com/',
-        ogTitle: 'EAT | Transforma el almuerzo de tu equipo',
+          'Transformamos tu espacio con rigor técnico y precio fijo garantizado. El método de optimización espacial y retorno absoluto.',
+        canonical: 'https://remodela.com/',
+        ogTitle: 'REMODELA | Javier Aguilar',
         ogDescription:
-          'Transformamos tu flujo alimentario con el método Corporate Food Flow. Un solo equipo planifica y ejecuta todo el proceso.',
-        ogUrl: 'https://eat.com/',
+          'Transformamos tu espacio con rigor técnico y precio fijo garantizado. El método de optimización espacial y retorno absoluto.',
+        ogUrl: 'https://remodela.com/',
       } satisfies RouteMeta,
     },
     {
@@ -46,12 +47,12 @@ const router = createRouter({
       name: 'video',
       component: VideoView,
       meta: {
-        title: 'Mira el video | EAT — Paso 1 de 2',
-        description: 'Descubre cómo implementar tu sistema de alimentación sin estrés con el método Corporate Food Flow.',
-        canonical: 'https://eat.com/ver-video',
-        ogTitle: 'Mira el video | EAT',
-        ogDescription: 'Ve el video y agenda tu diagnóstico corporativo.',
-        ogUrl: 'https://eat.com/ver-video',
+        title: 'Mira el video | REMODELA — Paso 1 de 2',
+        description: 'Descubre cómo blindar tu inversión con el método de Optimización Espacial y Retorno Absoluto.',
+        canonical: 'https://remodela.com/ver-video',
+        ogTitle: 'Mira el video | REMODELA',
+        ogDescription: 'Ve el video y agenda tu diagnóstico técnico especializado.',
+        ogUrl: 'https://remodela.com/ver-video',
       } satisfies RouteMeta,
     },
     {
@@ -59,12 +60,12 @@ const router = createRouter({
       name: 'booking',
       component: BookingView,
       meta: {
-        title: 'Agenda tu Sesión | EAT — Paso 2 de 2',
-        description: 'Selecciona el día y hora para tu diagnóstico corporativo.',
-        canonical: 'https://eat.com/agendar',
-        ogTitle: 'Agenda tu Sesión | EAT',
-        ogDescription: 'Elige tu horario y reserva tu diagnóstico corporativo.',
-        ogUrl: 'https://eat.com/agendar',
+        title: 'Agenda tu Sesión | REMODELA — Paso 2 de 2',
+        description: 'Selecciona el día y hora para tu diagnóstico técnico.',
+        canonical: 'https://remodela.com/agendar',
+        ogTitle: 'Agenda tu Sesión | REMODELA',
+        ogDescription: 'Elige tu horario y reserva tu diagnóstico técnico.',
+        ogUrl: 'https://remodela.com/agendar',
       } satisfies RouteMeta,
     },
     {
@@ -72,12 +73,12 @@ const router = createRouter({
       name: 'booked',
       component: BookedView,
       meta: {
-        title: 'Sesión Confirmada | EAT',
-        description: 'Tu diagnóstico con EAT está confirmado. Revisa tu correo.',
-        canonical: 'https://eat.com/cita-confirmada',
-        ogTitle: 'Sesión Confirmada | EAT',
+        title: 'Sesión Confirmada | REMODELA',
+        description: 'Tu diagnóstico con REMODELA está confirmado. Revisa tu correo.',
+        canonical: 'https://remodela.com/cita-confirmada',
+        ogTitle: 'Sesión Confirmada | REMODELA',
         ogDescription: 'Tu diagnóstico está reservado. Te contactaremos pronto.',
-        ogUrl: 'https://eat.com/cita-confirmada',
+        ogUrl: 'https://remodela.com/cita-confirmada',
       } satisfies RouteMeta,
     },
     {
@@ -85,12 +86,25 @@ const router = createRouter({
       name: 'no-space',
       component: NoSpaceView,
       meta: {
-        title: 'Sin Cupos Disponibles | EAT',
-        description: 'En este momento los cupos para proyectos de EAT están completos.',
-        canonical: 'https://eat.com/sin-espacio',
-        ogTitle: 'Sin Cupos Disponibles | EAT',
-        ogDescription: 'Los cupos para nuevas cuentas corporativas están completos. Te avisaremos cuando haya disponibilidad.',
-        ogUrl: 'https://eat.com/sin-espacio',
+        title: 'Sin Cupos Disponibles | REMODELA',
+        description: 'En este momento los cupos para proyectos de REMODELA están completos.',
+        canonical: 'https://remodela.com/sin-espacio',
+        ogTitle: 'Sin Cupos Disponibles | REMODELA',
+        ogDescription: 'Los cupos para nuevas obras están completos. Te avisaremos cuando haya disponibilidad.',
+        ogUrl: 'https://remodela.com/sin-espacio',
+      } satisfies RouteMeta,
+    },
+    {
+      path: '/gracias',
+      name: 'gracias',
+      component: GenericThanksView,
+      meta: {
+        title: 'Registro Completado | REMODELA',
+        description: 'Muchas gracias por tu tiempo.',
+        canonical: 'https://remodela.com/gracias',
+        ogTitle: 'Registro Completado | REMODELA',
+        ogDescription: 'Muchas gracias por tu tiempo.',
+        ogUrl: 'https://remodela.com/gracias',
       } satisfies RouteMeta,
     },
     {
@@ -98,12 +112,12 @@ const router = createRouter({
       name: 'privacy-policy',
       component: PrivacyPolicyView,
       meta: {
-        title: 'Política de Privacidad | EAT',
-        description: 'Política de privacidad de EAT. Información sobre el tratamiento de datos personales.',
-        canonical: 'https://eat.com/politicas-privacidad',
-        ogTitle: 'Política de Privacidad | EAT',
-        ogDescription: 'Política de privacidad de EAT.',
-        ogUrl: 'https://eat.com/politicas-privacidad',
+        title: 'Política de Privacidad | REMODELA',
+        description: 'Política de privacidad de REMODELA. Información sobre el tratamiento de datos personales.',
+        canonical: 'https://remodela.com/politicas-privacidad',
+        ogTitle: 'Política de Privacidad | REMODELA',
+        ogDescription: 'Política de privacidad de REMODELA.',
+        ogUrl: 'https://remodela.com/politicas-privacidad',
       } satisfies RouteMeta,
     },
     {
@@ -111,12 +125,12 @@ const router = createRouter({
       name: 'legal-notice',
       component: LegalNoticeView,
       meta: {
-        title: 'Aviso Legal | EAT',
-        description: 'Aviso legal de EAT. Términos y condiciones de uso del sitio web.',
-        canonical: 'https://eat.com/aviso-legal',
-        ogTitle: 'Aviso Legal | EAT',
-        ogDescription: 'Aviso legal de EAT.',
-        ogUrl: 'https://eat.com/aviso-legal',
+        title: 'Aviso Legal | REMODELA',
+        description: 'Aviso legal de REMODELA. Términos y condiciones de uso del sitio web.',
+        canonical: 'https://remodela.com/aviso-legal',
+        ogTitle: 'Aviso Legal | REMODELA',
+        ogDescription: 'Aviso legal de REMODELA.',
+        ogUrl: 'https://remodela.com/aviso-legal',
       } satisfies RouteMeta,
     },
   ],
@@ -143,7 +157,7 @@ const setCanonical = (href: string) => {
 
 router.afterEach((to) => {
   const meta = to.meta
-  document.title = meta.title ?? 'EAT'
+  document.title = meta.title ?? 'REMODELA'
   setMeta('description', meta.description ?? '')
   setOgMeta('og:title', meta.ogTitle ?? meta.title ?? '')
   setOgMeta('og:description', meta.ogDescription ?? meta.description ?? '')
@@ -172,7 +186,7 @@ const isFresh = (key: string, ttl: number): boolean => {
   return false
 }
 
-const PUBLIC_ROUTES = ['privacy-policy', 'legal-notice']
+const PUBLIC_ROUTES = ['privacy-policy', 'legal-notice', 'gracias']
 
 router.beforeEach((to, from, next) => {
   const routeName = to.name as string

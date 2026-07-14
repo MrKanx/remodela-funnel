@@ -10,32 +10,52 @@ const emit = defineEmits<{ (e: 'close'): void }>()
 
 const router = useRouter()
 const contactStore = useContactStore()
-const IS_DEV = window.location.hostname === 'localhost'
+const IS_DEV = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
 
 const submitting = ref(false)
 const touched = ref(false)
 
 const form = ref({
-  nivel: '',
-  viaje: '',
+  tipoEspacio: '',
   presupuesto: '',
-  reto: '',
-  consent: false,
+  visitaTecnica: '',
+  requerimientos: '',
+  aceptaContacto: false,
 })
 
-const wordCount = (s: string) => s.trim().split(/\s+/).filter(Boolean).length
+const tipoEspacioOpts = [
+  'Oficina / Corporativo',
+  'Consultorio médico o dental',
+  'Local comercial / Emprendimiento',
+  'Restaurante / Cafetería',
+  'Residencial (Cocinas, dormitorios, casas)',
+]
+const presupuestoOpts = [
+  'Menos de $10,000',
+  '$10,000 a $25,000',
+  '$25,000 a $50,000',
+  'Más de $50,000',
+]
+const visitaTecnicaOpts = [
+  'Sí, entiendo y deseo agendar la visita técnica pagada.',
+  'No, busco cotizaciones únicamente de manera virtual / sin costo.',
+]
+
+const wordCount = (str: string) => str.trim().split(/\s+/).filter(Boolean).length
 
 const isValid = () =>
-  !!form.value.nivel &&
-  !!form.value.viaje &&
+  !!form.value.tipoEspacio &&
   !!form.value.presupuesto &&
-  wordCount(form.value.reto) >= 5 &&
-  form.value.consent
+  !!form.value.visitaTecnica &&
+  wordCount(form.value.requerimientos) >= 5 &&
+  form.value.aceptaContacto
 
-const qualifies = () => {
-  if (form.value.nivel === 'menos-15') return false
-  if (form.value.viaje === 'explorando') return false
-  return true
+const isDisqualified = () => {
+  return (
+    form.value.tipoEspacio.includes('Residencial') ||
+    form.value.presupuesto.includes('Menos de $10,000') ||
+    form.value.visitaTecnica.includes('No, busco cotizaciones')
+  )
 }
 
 const handleSubmit = async () => {
@@ -44,73 +64,42 @@ const handleSubmit = async () => {
 
   submitting.value = true
   const contact = contactStore.get()
-  const califica = qualifies()
+  const disqualified = isDisqualified()
   const scheduleEventId = generateEventId('schedule')
-
-  const nivelLabel: Record<string, string> = {
-    'menos-15': 'Menos de 15',
-    '15-50': '15 a 50',
-    '51-100': '51 a 100',
-    'mas-100': 'Más de 100',
-  }
-  const viajeLabel: Record<string, string> = {
-    inmediato: 'Lo antes posible',
-    'mes-proximo': 'En el próximo mes',
-    explorando: 'Solo explorando',
-  }
-  const presupuestoLabel: Record<string, string> = {
-    catering: 'Catering / Viandas en serie',
-    individual: 'Cada colaborador busca',
-    comedor: 'Comedor interno',
-    'primera-vez': 'Primera vez',
-  }
-
-  const etiquetas = [
-    'funnel-eat',
-    'step-2-cualificacion',
-    califica ? 'califica-eat' : 'no-califica-eat',
-    `tipo-${form.value.nivel}`,
-    `inicio-${form.value.viaje}`,
-    `gestion-${form.value.presupuesto}`,
-  ]
 
   const notas = `
 ━━━━━━━━━━━━━━━━━━━━━━━━
-EAT — Cualificación
+REMODELA — Cualificación
 ━━━━━━━━━━━━━━━━━━━━━━━━
 👤 ${contact.nombre} ${contact.apellido}
 📧 ${contact.email}
 📱 ${contact.telefono}
 ━━━━━━━━━━━━━━━━━━━━━━━━
-👥 Personal: ${form.value.nivel}
-⏱️ Urgencia: ${form.value.viaje}
-🍲 Gestión Actual: ${form.value.presupuesto}
-💡 Desafío: ${form.value.reto}
+🏠 Tipo Espacio: ${form.value.tipoEspacio}
+💰 Presupuesto: ${form.value.presupuesto}
+🛠 Visita Técnica: ${form.value.visitaTecnica}
+📝 Requerimientos: ${form.value.requerimientos}
 ━━━━━━━━━━━━━━━━━━━━━━━━
-${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Falta de personal'}
+${!disqualified ? '✅ CALIFICA' : '❌ NO CALIFICA'}
   `.trim()
 
   const pageEntry = Number(sessionStorage.getItem('alu_page_entry')) || Date.now()
   const pageDuration = Math.floor((Date.now() - pageEntry) / 1000)
   const notasConTiempo = `${notas}\n⏳ Tiempo total en página: ${Math.floor(pageDuration / 60)}m ${pageDuration % 60}s`
 
-  const etiquetasStr = etiquetas.join(', ')
-  const payload: Record<string, string> = {
-    nombre: contact.nombre,
-    apellido: contact.apellido,
-    email: contact.email,
-    telefono: contact.telefono,
-    phone: contact.telefono,
+  const payload: Record<string, any> = {
+    nombre: contact.nombre || '',
+    apellido: contact.apellido || '',
+    email: contact.email || '',
+    telefono: contact.telefono || '',
+    phone: contact.telefono || '',
     paso: '2-cualificacion',
-    nivel: form.value.nivel,
-    viaje: form.value.viaje,
+    tipoEspacio: form.value.tipoEspacio,
     presupuesto: form.value.presupuesto,
-    reto: form.value.reto,
-    cualifica: califica ? 'true' : 'false',
-    etiquetas: etiquetasStr,
-    tags: etiquetasStr,
+    visitaTecnica: form.value.visitaTecnica,
+    requerimientos: form.value.requerimientos,
+    cualifica: !disqualified,
     notas: notasConTiempo,
-    nota: notasConTiempo,
     pageDuration: String(pageDuration),
     event_id: scheduleEventId,
     ...getStoredFbParams(),
@@ -118,7 +107,7 @@ ${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Falta de personal'}
 
   trackStage('cualificacion_completada', payload)
 
-  const webhookUrl = import.meta.env.VITE_WEBHOOK_CALIFICACION ?? 'https://services.leadconnectorhq.com/hooks/kU4URJgWDNYci1iLXzD8/webhook-trigger/yWmEJHsLZ2oDn7PyuT9Y'
+  const webhookUrl = import.meta.env.VITE_WEBHOOK_CALIFICACION ?? 'https://services.leadconnectorhq.com/hooks/qrzFcTFG8SIL37kcHGSs/webhook-trigger/SaiUzL2ywzABxLH2J89h'
   await fetch(webhookUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -128,7 +117,7 @@ ${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Falta de personal'}
   ;(window as any).fbq?.('track', 'CompleteRegistration',
     {
       content_name: 'cualificacion-step2',
-      status: califica ? 'califica' : 'no-califica',
+      status: !disqualified ? 'califica' : 'no-califica',
       value: 1,
       currency: 'USD',
     },
@@ -138,12 +127,12 @@ ${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Falta de personal'}
   submitting.value = false
   emit('close')
 
-  if (califica) {
+  if (!disqualified) {
     ;(window as any).fbq?.('track', 'Lead')
     router.push('/agendar')
   } else {
-    if (!IS_DEV) localStorage.setItem('os_disq_at', String(Date.now()))
-    router.push('/sin-espacio')
+    localStorage.setItem('os_disq_at', String(Date.now()))
+    router.push('/gracias')
   }
 }
 
@@ -155,7 +144,7 @@ onUnmounted(() => document.removeEventListener('keydown', onKeydown))
 watch(() => props.open, (v) => {
   if (v) {
     touched.value = false
-    form.value = { nivel: '', viaje: '', presupuesto: '', reto: '', consent: false }
+    form.value = { tipoEspacio: '', presupuesto: '', visitaTecnica: '', requerimientos: '', aceptaContacto: false }
   }
   document.body.style.overflow = v ? 'hidden' : ''
 })
@@ -169,129 +158,101 @@ watch(() => props.open, (v) => {
         <div class="cal-modal">
 
           <button class="cal-close" @click="emit('close')" aria-label="Cerrar">
-            <i class="fa-solid fa-xmark"></i>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
           </button>
 
           <div class="cal-header">
-            <div class="cal-header-icon" aria-hidden="true">
-              <i class="fa-solid fa-hard-hat"></i>
-            </div>
             <h2 id="cal-title" class="cal-title">
-              Antes de agendar, cuéntanos sobre
-              <span class="cal-accent">tu equipo</span>
+              Antes de agendar, cuéntanos sobre tu proyecto
             </h2>
-            <p class="cal-subtitle">4 breves preguntas para preparar tu diagnóstico corporativo.</p>
+            <p class="cal-subtitle">3 breves preguntas para preparar tu diagnóstico y propuesta inicial.</p>
           </div>
 
           <form class="cal-form" @submit.prevent="handleSubmit" novalidate>
 
-            <!-- Q1 — Nivel -->
-            <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.nivel }">
+            <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.tipoEspacio }">
               <legend class="cal-legend">
                 <span class="cal-q-num">01</span>
-                ¿Cuántos colaboradores trabajan presencialmente?
+                ¿Qué tipo de espacio deseas remodelar o diseñar?
               </legend>
               <div class="cal-options">
-                <label v-for="opt in [
-                  { value: 'menos-15', label: 'Menos de 15' },
-                  { value: '15-50', label: '15 a 50' },
-                  { value: '51-100', label: '51 a 100' },
-                  { value: 'mas-100', label: 'Más de 100' },
-                ]" :key="opt.value" class="cal-option" :class="{ selected: form.nivel === opt.value }">
-                  <input type="radio" :value="opt.value" v-model="form.nivel" hidden />
+                <label v-for="opt in tipoEspacioOpts" :key="opt" class="cal-option" :class="{ selected: form.tipoEspacio === opt }">
+                  <input type="radio" :value="opt" v-model="form.tipoEspacio" hidden />
                   <span class="cal-option__radio" aria-hidden="true" />
-                  <span class="cal-option__label">{{ opt.label }}</span>
+                  <span class="cal-option__label">{{ opt }}</span>
                 </label>
               </div>
-              <span v-if="touched && !form.nivel" class="cal-error">Selecciona una opción</span>
+              <span v-if="touched && !form.tipoEspacio" class="cal-error">Selecciona una opción</span>
             </fieldset>
 
-            <!-- Q2 — Viaje -->
-            <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.viaje }">
+            <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.presupuesto }">
               <legend class="cal-legend">
                 <span class="cal-q-num">02</span>
-                ¿Con qué urgencia buscan implementar la solución?
+                ¿Cuál es el presupuesto estimado para la ejecución del proyecto?
               </legend>
               <div class="cal-options">
-                <label v-for="opt in [
-                  { value: 'inmediato', label: 'Lo antes posible' },
-                  { value: 'mes-proximo', label: 'En el próximo mes' },
-                  { value: 'explorando', label: 'Solo estoy explorando por ahora' },
-                ]" :key="opt.value" class="cal-option" :class="{ selected: form.viaje === opt.value }">
-                  <input type="radio" :value="opt.value" v-model="form.viaje" hidden />
+                <label v-for="opt in presupuestoOpts" :key="opt" class="cal-option" :class="{ selected: form.presupuesto === opt }">
+                  <input type="radio" :value="opt" v-model="form.presupuesto" hidden />
                   <span class="cal-option__radio" aria-hidden="true" />
-                  <span class="cal-option__label">{{ opt.label }}</span>
+                  <span class="cal-option__label">{{ opt }}</span>
                 </label>
               </div>
-              <span v-if="touched && !form.viaje" class="cal-error">Selecciona una opción</span>
+              <span v-if="touched && !form.presupuesto" class="cal-error">Selecciona una opción</span>
             </fieldset>
 
-            <!-- Q3 — Presupuesto -->
-            <fieldset class="cal-fieldset cal-fieldset--budget" :class="{ 'has-error': touched && !form.presupuesto, 'has-investment': form.presupuesto && form.presupuesto !== 'no' }">
-              <legend class="cal-legend cal-legend--budget">
-                <span class="cal-q-num cal-q-num--budget">03</span>
-                <span>¿Cómo gestionan actualmente la alimentación?</span>
-                <i class="fa-solid fa-utensils cal-legend-chart" aria-hidden="true"></i>
+            <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.visitaTecnica }">
+              <legend class="cal-legend">
+                <span class="cal-q-num">03</span>
+                Para iniciar la cotización formal, realizamos una visita técnica obligatoria con costo. ¿Estás de acuerdo?
               </legend>
               <div class="cal-options">
-                <label v-for="opt in [
-                  { value: 'catering', label: 'Catering tradicional / Viandas en serie', premium: true },
-                  { value: 'individual', label: 'Cada colaborador busca su comida', premium: false },
-                  { value: 'comedor', label: 'Contamos con un comedor / buffet interno', premium: true },
-                  { value: 'primera-vez', label: 'Buscamos implementarlo por primera vez', premium: false },
-                ]" :key="opt.value" class="cal-option" :class="{
-                  selected: form.presupuesto === opt.value,
-                  'cal-option--premium': opt.premium && form.presupuesto === opt.value,
-                  'cal-option--low': opt.value === 'no' && form.presupuesto === 'no',
-                  'cal-option--premium-hover': opt.premium && form.presupuesto !== opt.value,
-                }">
-                  <input type="radio" :value="opt.value" v-model="form.presupuesto" hidden />
+                <label v-for="opt in visitaTecnicaOpts" :key="opt" class="cal-option" :class="{ selected: form.visitaTecnica === opt }">
+                  <input type="radio" :value="opt" v-model="form.visitaTecnica" hidden />
                   <span class="cal-option__radio" aria-hidden="true" />
-                  <i v-if="opt.premium" class="fa-solid fa-gem cal-option__gem" aria-hidden="true"></i>
-                  <span class="cal-option__label">{{ opt.label }}</span>
+                  <span class="cal-option__label">{{ opt }}</span>
                 </label>
               </div>
-              <span v-if="touched && !form.presupuesto" class="cal-error">Selecciona un rango</span>
+              <span v-if="touched && !form.visitaTecnica" class="cal-error">Selecciona una opción</span>
             </fieldset>
 
-            <!-- Q4 — Reto -->
-            <fieldset class="cal-fieldset" :class="{ 'has-error': touched && wordCount(form.reto) < 5 }">
+            <fieldset class="cal-fieldset" :class="{ 'has-error': touched && wordCount(form.requerimientos) < 5 }">
               <legend class="cal-legend">
                 <span class="cal-q-num">04</span>
-                ¿Cuál es el principal problema que enfrentan actualmente?
+                Describe brevemente los requerimientos principales:
               </legend>
               <textarea
-                v-model="form.reto"
+                v-model="form.requerimientos"
                 class="cal-textarea"
-                placeholder="Ej: Tengo quejas por la comida fría, o tenemos casos de intolerancias y alergias no atendidas..."
-                rows="4"
-                aria-describedby="q4-hint"
+                placeholder="Ej: Necesito remodelar un local de 80m² para una cafetería moderna..."
+                rows="3"
               ></textarea>
-              <span id="q4-hint" class="cal-hint">
-                {{ wordCount(form.reto) }}/5 palabras mínimo
-              </span>
-              <span v-if="touched && wordCount(form.reto) < 5" class="cal-error">
-                Describe tu desafío con al menos 5 palabras
-              </span>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 0.5rem; font-size: 0.85rem;">
+                <span v-if="touched && wordCount(form.requerimientos) < 5" class="cal-error" style="margin-top: 0;">Por favor, describe tu requerimiento con al menos 5 palabras.</span>
+                <span v-else></span>
+                <span :style="{ color: wordCount(form.requerimientos) >= 5 ? '#10B981' : '#6B7280', fontWeight: 500 }">
+                  {{ wordCount(form.requerimientos) }} / 5 palabras mín.
+                </span>
+              </div>
             </fieldset>
 
-            <!-- Consent -->
-            <label class="cal-consent" :class="{ 'has-error': touched && !form.consent }">
-              <input type="checkbox" v-model="form.consent" />
+            <label class="cal-consent" :class="{ 'has-error': touched && !form.aceptaContacto }">
+              <input type="checkbox" v-model="form.aceptaContacto" />
               <span class="cal-consent__box" aria-hidden="true" />
               <span class="cal-consent__text">
-                Acepto que EAT me contacte para agendar mi diagnóstico corporativo.
+                Acepto que el equipo técnico se contacte conmigo para coordinar los detalles.
               </span>
             </label>
-            <span v-if="touched && !form.consent" class="cal-error">Debes aceptar para continuar</span>
+            <span v-if="touched && !form.aceptaContacto" class="cal-error">Debes aceptar para continuar</span>
 
             <button type="submit" class="cal-submit" :disabled="submitting">
               <span v-if="!submitting">
-                <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-                Ver disponibilidad
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                SOLICITAR DIAGNÓSTICO →
               </span>
               <span v-else>
-                <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
+                <svg class="fa-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
                 Procesando...
               </span>
             </button>
@@ -355,25 +316,13 @@ watch(() => props.open, (v) => {
   font-size: 0.9rem;
   transition: background 0.2s, color 0.2s;
   z-index: 1;
-  &:hover { background: rgba(0,0,0,0.05); color: colors.$S2M-GOLD; }
+  &:hover { background: rgba(0,0,0,0.05); color: colors.$EAT-ACCENT; }
 }
 
 .cal-header {
-  padding: 2rem 2rem 1.25rem;
+  padding: 2.5rem 2rem 1.25rem;
   border-bottom: 1px solid rgba(0,0,0,0.05);
   text-align: center;
-}
-
-.cal-header-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  background: colors.$S2M-DARK-BLUE;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
-  i { color: colors.$S2M-GOLD; font-size: 1.4rem; }
 }
 
 .cal-title {
@@ -384,8 +333,6 @@ watch(() => props.open, (v) => {
   line-height: 1.25;
   letter-spacing: -0.02em;
 }
-
-.cal-accent { color: colors.$S2M-GOLD; }
 
 .cal-subtitle {
   font-size: 0.86rem;
@@ -405,20 +352,7 @@ watch(() => props.open, (v) => {
   padding: 0;
   margin: 0;
 
-  &.has-error .cal-options { border-color: colors.$S2M-GOLD; border-radius: 10px; }
-
-  &--budget {
-    border: 1.5px solid transparent;
-    border-radius: 12px;
-    padding: 1rem 0.85rem;
-    margin: 0 -0.85rem;
-    transition: all 0.25s ease;
-
-    &.has-investment {
-      border-color: rgba(colors.$S2M-DARK-BLUE, 0.4);
-      background: rgba(colors.$S2M-DARK-BLUE, 0.1);
-    }
-  }
+  &.has-error .cal-options { border-color: colors.$EAT-ACCENT; border-radius: 10px; }
 }
 
 .cal-legend {
@@ -434,26 +368,6 @@ watch(() => props.open, (v) => {
   padding: 0 0.5rem;
   border-radius: 8px;
   margin-left: -0.5rem;
-
-  &--budget {
-    gap: 0.4rem;
-  }
-}
-
-.cal-legend-chart {
-  color: colors.$S2M-GOLD;
-  font-size: 0.8rem;
-  margin-left: auto;
-  animation: chart-pulse 2s ease-in-out infinite;
-
-  .cal-fieldset--budget.has-investment & {
-    animation: chart-pulse 1s ease-in-out infinite;
-  }
-}
-
-@keyframes chart-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.85); }
 }
 
 .cal-q-num {
@@ -463,16 +377,11 @@ watch(() => props.open, (v) => {
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  background: colors.$S2M-DARK-BLUE;
+  background: colors.$QS-DARK;
   color: colors.$QS-SURFACE;
   font-size: 0.72rem;
   font-weight: 800;
   flex-shrink: 0;
-
-  &--budget {
-    background: colors.$S2M-GOLD;
-    color: #000;
-  }
 }
 
 .cal-options {
@@ -499,8 +408,8 @@ watch(() => props.open, (v) => {
   }
 
   &.selected {
-    border-color: colors.$S2M-GOLD;
-    background: rgba(colors.$S2M-GOLD, 0.08);
+    border-color: colors.$EAT-ACCENT;
+    background: rgba(colors.$EAT-ACCENT, 0.08);
   }
 
   &__radio {
@@ -513,15 +422,15 @@ watch(() => props.open, (v) => {
     transition: all 0.2s ease;
 
     .cal-option.selected & {
-      border-color: colors.$S2M-GOLD;
-      background: rgba(colors.$S2M-GOLD, 0.1);
+      border-color: colors.$EAT-ACCENT;
+      background: rgba(colors.$EAT-ACCENT, 0.1);
       &::after {
         content: '';
         position: absolute;
         inset: 4px;
         border-radius: 50%;
-        background: colors.$S2M-GOLD;
-        box-shadow: 0 0 8px colors.$S2M-GOLD;
+        background: colors.$EAT-ACCENT;
+        box-shadow: 0 0 8px colors.$EAT-ACCENT;
       }
     }
   }
@@ -551,22 +460,15 @@ watch(() => props.open, (v) => {
   box-sizing: border-box;
   &::placeholder { color: #9CA3AF; }
   &:focus { 
-    border-color: colors.$S2M-GOLD; 
+    border-color: colors.$EAT-ACCENT; 
     background: colors.$QS-SURFACE; 
   }
-}
-
-.cal-hint {
-  display: block;
-  font-size: 0.76rem;
-  color: #6B7280;
-  margin-top: 0.35rem;
 }
 
 .cal-error {
   display: block;
   font-size: 0.78rem;
-  color: colors.$OS-RED; /* Maybe S2M-RED later */
+  color: colors.$OS-RED;
   margin-top: 0.35rem;
 }
 
@@ -592,8 +494,8 @@ watch(() => props.open, (v) => {
     justify-content: center;
 
     input:checked ~ & {
-      background: colors.$S2M-GOLD;
-      border-color: colors.$S2M-GOLD;
+      background: colors.$EAT-ACCENT;
+      border-color: colors.$EAT-ACCENT;
       &::after { content: '✓'; color: colors.$QS-SURFACE; font-size: 0.8rem; font-weight: 900; }
     }
   }
@@ -610,7 +512,7 @@ watch(() => props.open, (v) => {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: colors.$S2M-GOLD;
+  background: colors.$EAT-ACCENT;
   color: colors.$QS-SURFACE;
   border: none;
   border-radius: 12px;
@@ -622,8 +524,11 @@ watch(() => props.open, (v) => {
   cursor: pointer;
   width: 100%;
   transition: background 0.2s ease, transform 0.15s ease;
-  box-shadow: 0 4px 16px rgba(colors.$S2M-GOLD, 0.3);
-  &:hover:not(:disabled) { background: #FFD25B; transform: translateY(-1px); }
+  box-shadow: 0 4px 16px rgba(colors.$EAT-ACCENT, 0.3);
+  &:hover:not(:disabled) { background: darken(colors.$EAT-ACCENT, 5%); transform: translateY(-1px); }
   &:disabled { opacity: 0.65; cursor: not-allowed; }
 }
+
+.fa-spin { animation: fa-spin 2s infinite linear; }
+@keyframes fa-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 </style>

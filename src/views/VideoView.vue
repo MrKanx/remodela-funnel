@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
 import CalendarModal from '@/components/CalendarModal.vue'
 import { trackStage, generateEventId } from '@/utils/ghl'
 import { useContactStore } from '@/stores/contact'
 
+const router = useRouter()
 const contactStore = useContactStore()
 const calendarOpen = ref(false)
+
 const captureOpen = ref(false)
 const captureForm = ref({ nombre: '', apellido: '', empresa: '', email: '', telefono: '' })
 const captureErrors = ref<Record<string, string>>({})
@@ -53,7 +56,7 @@ const submitCapture = async () => {
   startTimer()
 }
 
-const COUNTDOWN_SECONDS = 120
+const COUNTDOWN_SECONDS = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? 3 : 120
 const secondsLeft = ref(COUNTDOWN_SECONDS)
 const ctaUnlocked = ref(false)
 let timer: ReturnType<typeof setInterval> | null = null
@@ -99,7 +102,7 @@ onMounted(() => {
     document.head.appendChild(script1)
     
     const script2 = document.createElement('script')
-    script2.src = 'https://fast.wistia.com/embed/qlg8athp0s.js'
+    script2.src = 'https://fast.wistia.com/embed/mlqaxqjnvj.js'
     script2.type = 'module'
     script2.async = true
     document.head.appendChild(script2)
@@ -113,7 +116,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   <div class="vv-page">
 
     <header class="vv-topbar">
-      <span class="vv-topbar__logo-text">E<span class="vv-topbar__logo-accent">AT</span></span>
+      <span class="vv-topbar__logo-text">REMO<span class="vv-topbar__logo-accent">DELA</span></span>
     </header>
 
     <main class="vv-main">
@@ -128,17 +131,17 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 
       <section class="vv-headline">
         <h1 class="vv-h1">
-          Transforma el almuerzo de tu equipo de un gasto logístico a una
-          <span class="vv-accent">herramienta estratégica de alto rendimiento</span>
+          Transformamos tu espacio con rigor técnico y
+          <span class="vv-accent">precio fijo garantizado</span>
         </h1>
         <p class="vv-subtitle">
-          Descubre cómo el método Corporate Food Flow elimina las quejas, reduce el desperdicio y motiva a tus colaboradores con sabor real de hogar.
+          El método de optimización espacial y retorno absoluto para que tu remodelación sea una inversión rentable, no un dolor de cabeza.
         </p>
       </section>
 
       <div class="vv-video-wrapper">
         <div class="vv-video-ratio">
-          <wistia-player media-id="c0iw8b7y8t" aspect="1.7777777777777777"></wistia-player>
+          <wistia-player media-id="mlqaxqjnvj" aspect="1.7777777777777777"></wistia-player>
         </div>
       </div>
 
@@ -182,13 +185,12 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="vv-footer__copy">© {{ new Date().getFullYear() }} EAT. Todos los derechos reservados.</p>
+      <p class="vv-footer__copy">© {{ new Date().getFullYear() }} REMODELA. Todos los derechos reservados.</p>
       <p class="vv-footer__dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 
   </div>
 
-  <!-- The Qualification Modal used before routing to Booking -->
   <CalendarModal :open="calendarOpen" @close="calendarOpen = false" />
 
   <Teleport to="body">
@@ -446,7 +448,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   box-shadow: 0 4px 20px rgba(colors.$S2M-GOLD, 0.3);
 
   &:hover {
-    background: #FFD25B;
+    background: #1D4ED8;
     transform: translateY(-2px);
     box-shadow: 0 8px 28px rgba(colors.$S2M-GOLD, 0.45);
   }
@@ -677,7 +679,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   box-shadow: 0 4px 16px rgba(colors.$S2M-GOLD, 0.3);
 
   &:hover:not(:disabled) {
-    background: #FFD25B;
+    background: #1D4ED8;
     transform: translateY(-2px);
   }
 
@@ -685,5 +687,12 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     opacity: 0.6;
     cursor: not-allowed;
   }
+}
+
+wistia-player[media-id='mlqaxqjnvj']:not(:defined) {
+  background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/mlqaxqjnvj/swatch');
+  display: block;
+  filter: blur(5px);
+  padding-top: 56.25%;
 }
 </style>

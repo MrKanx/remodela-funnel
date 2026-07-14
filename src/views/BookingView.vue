@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const iframeHeight = ref(1100)
 
-const BASE_URL = 'https://api.leadconnectorhq.com/widget/booking/ldp9xYyX6UpQ38iToUvF'
+const BASE_URL = 'https://api.leadconnectorhq.com/widget/booking/7CkTJJN7XElT5wQhs9vH'
 
 const calendarUrl = computed(() => {
   try {
@@ -57,7 +57,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
   <div class="booking">
 
     <header class="booking__topbar">
-      <span class="booking__logo-text">E<span class="booking__logo-accent">AT</span></span>
+      <span class="booking__logo-text">REMO<span class="booking__logo-accent">DELA</span></span>
     </header>
 
     <main class="booking__main">
@@ -88,7 +88,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
           <span class="booking__title-accent">sesión inicial</span>
         </h1>
         <p class="booking__hero-subtitle">
-          Un diagnóstico con el equipo de EAT para conocer tu caso, evaluar tu flujo alimentario y definir cómo implementar un sistema corporativo sin complicaciones.
+          Un diagnóstico con el equipo de REMODELA para conocer tu caso, evaluar tus espacios y definir cómo implementar una remodelación sin complicaciones.
         </p>
       </section>
 
@@ -96,7 +96,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
         <iframe
           :src="calendarUrl"
           :style="{ height: iframeHeight + 'px' }"
-          title="Agenda tu sesión con EAT"
+          title="Agenda tu sesión con REMODELA"
           class="calendar__iframe"
           frameborder="0"
           scrolling="no"
@@ -111,7 +111,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="booking__footer-copy">© {{ new Date().getFullYear() }} EAT. Todos los derechos reservados.</p>
+      <p class="booking__footer-copy">© {{ new Date().getFullYear() }} REMODELA. Todos los derechos reservados.</p>
       <p class="booking__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 

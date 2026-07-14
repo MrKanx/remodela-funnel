@@ -29,7 +29,7 @@ onMounted(() => {
   <div class="nospace">
 
     <header class="nospace__topbar">
-      <span class="nospace__logo-text">E<span class="nospace__logo-accent">AT</span></span>
+      <span class="nospace__logo-text">REMO<span class="nospace__logo-accent">DELA</span></span>
     </header>
 
     <main class="nospace__main">
@@ -49,10 +49,10 @@ onMounted(() => {
           <i class="fa-solid fa-calendar-xmark nospace__icon"></i>
         </div>
 
-        <h1 class="nospace__title">
-          Lo sentimos, nuestros cupos<br>
-          de EAT están completos.
-        </h1>
+        <p class="nospace__message">
+          En este momento los cupos para nuevos proyectos<br class="mobile-hide"/>
+          de REMODELA están completos.
+        </p>
 
         <p class="nospace__body">
           Cuando se libere un espacio, podrás agendar tu diagnóstico corporativo
@@ -68,10 +68,9 @@ onMounted(() => {
         </p>
       </div>
 
-      <p class="nospace__footer-note">
-        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-        EAT asume un número limitado de cuentas corporativas para asegurar la calidad de nuestro servicio de alimentación. Te notificaremos en cuanto haya disponibilidad.
-      </p>
+      <div class="nospace__info">
+        REMODELA asume un número limitado de proyectos para asegurar la máxima calidad de nuestros servicios de diseño y construcción. Te notificaremos en cuanto haya disponibilidad en la agenda.
+      </div>
 
     </main>
 
@@ -80,7 +79,7 @@ onMounted(() => {
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="nospace__footer-copy">© {{ new Date().getFullYear() }} EAT. Todos los derechos reservados.</p>
+      <p class="nospace__footer-copy">© {{ new Date().getFullYear() }} REMODELA. Todos los derechos reservados.</p>
     </footer>
 
   </div>

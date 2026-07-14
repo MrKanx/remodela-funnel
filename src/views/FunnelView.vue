@@ -29,18 +29,18 @@ onMounted(() => {
       <!-- HEADER -->
       <header class="funnel__header">
         <div class="funnel__logo-wrap">
-          <span class="funnel__logo-text">E<span class="funnel__logo-accent">AT</span></span>
+          <span class="funnel__logo-text">REMO<span class="funnel__logo-accent">DELA</span></span>
         </div>
       </header>
 
       <!-- HERO -->
       <section class="funnel__hero">
         <h1 class="funnel__headline">
-          Alimentar a gran escala debería motivar a tu equipo, <span class="funnel__headline-accent">no ser un gasto que tolerar</span>
+          Iniciar una remodelación no debería ser como <span class="funnel__headline-accent">firmar un cheque en blanco</span>
         </h1>
         
         <p class="funnel__hero-sub">
-          Descubre cómo el método Corporate Food Flow transforma el almuerzo en tu empresa con sabor a hogar, reduciendo el desperdicio y eliminando las quejas del personal.
+          Descubre cómo transformamos oficinas, consultorios y negocios bajo un precio fijo e inamovible, sin sorpresas ni retrasos.
         </p>
 
         <div class="funnel__content-grid">
@@ -49,10 +49,10 @@ onMounted(() => {
             <div class="funnel__bullets-box">
               <p class="funnel__bullets-title">Nuestro Método en 3 Pasos:</p>
               <ul class="funnel__bullets">
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Mapeo Biológico:</strong> Identificamos restricciones médicas y dietas de tu personal.</li>
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Menú Adaptativo:</strong> Comida tipo buffet, completa y balanceada, con sabor a hogar.</li>
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Control Térmico y Cero Desperdicio:</strong> Optimizamos la cadena logística, reduciendo hasta un 35% el desperdicio.</li>
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Beneficio Real:</strong> Transforma la comida en un beneficio que tu gente sí valora.</li>
+                <li><i class="fa-solid fa-ruler-combined"></i> <strong>Diagnóstico Técnico Avanzado:</strong> Asesoría en distribución inteligente y optimización espacial.</li>
+                <li><i class="fa-solid fa-hammer"></i> <strong>Ejecución Llave en Mano:</strong> El precio fijo que firmamos al inicio es el que pagas al final. Punto.</li>
+                <li><i class="fa-solid fa-chart-line"></i> <strong>Retorno Absoluto:</strong> Diseño estratégico para aumentar tu ticket promedio y atraer más clientes.</li>
+                <li><i class="fa-solid fa-shield-halved"></i> <strong>Garantía Postobra:</strong> Respaldo de 30 días para tu total tranquilidad.</li>
               </ul>
             </div>
           </div>
@@ -86,19 +86,19 @@ onMounted(() => {
         <p class="funnel__stats-eyebrow">UN RESPALDO QUE SE DEMUESTRA CON RESULTADOS</p>
         <div class="funnel__stats-grid">
           <div class="funnel__stats-card">
-            <div class="funnel__stats-icon"><i class="fa-solid fa-house-circle-check"></i></div>
-            <h3 class="funnel__stats-number">-35%</h3>
-            <p class="funnel__stats-text">de reducción en desperdicio de comida corporativa</p>
+            <div class="funnel__stats-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+            <h3 class="funnel__stats-number">100%</h3>
+            <p class="funnel__stats-text">de cumplimiento con el presupuesto inicial (cero sorpresas)</p>
           </div>
           <div class="funnel__stats-card">
-            <div class="funnel__stats-icon"><i class="fa-solid fa-users-viewfinder"></i></div>
-            <h3 class="funnel__stats-number">98%</h3>
-            <p class="funnel__stats-text">de satisfacción interna en los colaboradores</p>
+            <div class="funnel__stats-icon"><i class="fa-solid fa-expand"></i></div>
+            <h3 class="funnel__stats-number">+30%</h3>
+            <p class="funnel__stats-text">de optimización en el uso de tu espacio comercial</p>
           </div>
           <div class="funnel__stats-card">
-            <div class="funnel__stats-icon"><i class="fa-solid fa-star"></i></div>
+            <div class="funnel__stats-icon"><i class="fa-solid fa-clock"></i></div>
             <h3 class="funnel__stats-number">0</h3>
-            <p class="funnel__stats-text">ausentismo vespertino por malestar estomacal</p>
+            <p class="funnel__stats-text">retrasos injustificados durante la ejecución de la obra</p>
           </div>
         </div>
       </section>
@@ -108,15 +108,15 @@ onMounted(() => {
         <div class="funnel__authority-inner">
           <div class="funnel__authority-photo-wrap">
             <div class="funnel__authority-avatar" aria-hidden="true">
-              <i class="fa-solid fa-user-tie"></i>
+              <i class="fa-solid fa-hard-hat"></i>
             </div>
           </div>
           <div class="funnel__authority-content">
-            <p class="funnel__authority-eyebrow">Fundadora de EAT</p>
-            <h2 id="authority-heading" class="funnel__authority-name">Sol Triviño</h2>
+            <p class="funnel__authority-eyebrow">Líder Técnico de REMODELA</p>
+            <h2 id="authority-heading" class="funnel__authority-name">Javier Aguilar</h2>
             <p class="funnel__authority-role">CEO</p>
             <p class="funnel__authority-bio">
-              En EAT sabemos que la alimentación del personal es mucho más que un trámite logístico. Entregar viandas monótonas a tu equipo es una fuga de dinero. <strong>Nuestro objetivo es convertir el almuerzo en ingeniería de bienestar, dando a tu gente nutrición real y sabor de hogar.</strong>
+              En Remodela sabemos que el mercado de la construcción está roto. Contratar barato termina saliendo caro. <strong>Nuestro objetivo es blindar tu inversión, entregando tu proyecto a tiempo y a precio fijo, sin sobrecostos ni dolores de cabeza.</strong>
             </p>
           </div>
         </div>
@@ -125,14 +125,14 @@ onMounted(() => {
       <!-- FINAL CTA -->
       <section class="funnel__final-cta">
         <div class="funnel__logo-wrap funnel__logo-wrap--large">
-          <span class="funnel__logo-text">E<span class="funnel__logo-accent">AT</span></span>
+          <span class="funnel__logo-text">REMO<span class="funnel__logo-accent">DELA</span></span>
         </div>
         <h2 class="funnel__final-title">
-          ¿Listo para eliminar las quejas y<br>
-          <span class="funnel__final-accent">motivar a tu equipo?</span>
+          ¿Listo para abrir tu negocio a tiempo y<br>
+          <span class="funnel__final-accent">sin sorpresas en el precio?</span>
         </h2>
         <p class="funnel__final-sub">
-          Accede al video gratuito donde te explicamos por qué nuestro método Corporate Food Flow es la opción más segura para proteger tu inversión en bienestar.<br><br>
+          Accede al video gratuito donde te explicamos cómo el método de Optimización Espacial y Retorno Absoluto blindará tu inversión.<br><br>
         </p>
         <button class="funnel__cta funnel__cta--pulse" @click="openModal">
           <i class="fa-solid fa-video"></i>
@@ -156,7 +156,7 @@ onMounted(() => {
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="funnel__footer-copy">© {{ new Date().getFullYear() }} EAT. Todos los derechos reservados.</p>
+      <p class="funnel__footer-copy">© {{ new Date().getFullYear() }} REMODELA. Todos los derechos reservados.</p>
       <p class="funnel__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 
@@ -340,12 +340,12 @@ onMounted(() => {
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 15px 30px rgba(colors.$S2M-GOLD, 0.4);
-    background: #FFD25B;
+    background: #1D4ED8;
   }
 }
 
 .funnel__cta--pulse {
-  background: linear-gradient(90deg, #D49A1E 0%, #FFD25B 100%);
+  background: linear-gradient(90deg, #1E3A8A 0%, #2563EB 100%);
   margin-top: 2.5rem;
   max-width: 450px;
   margin-left: auto;
