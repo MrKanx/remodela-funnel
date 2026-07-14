@@ -103,14 +103,14 @@ function buildNotes(): string {
 function calcTags(): string[] {
   // "Solo estoy explorando" → descalifica y no es urgente
   if (s2.value.urgency === 'just-looking') {
-    return ['no-cualificado-ab', 'no-urgente']
+    return ['no-cualificado', 'no-urgente']
   }
 
-  // El criterio clave es el presupuesto mayor a $1200
-  const qualifies = s2.value.budget === 'yes'
+  // El criterio clave es tener 15 o más colaboradores
+  const qualifies = s2.value.projectType !== 'less-15'
 
   return [
-    qualifies ? 'cualificado-ab' : 'no-cualificado-ab',
+    qualifies ? 'cualificado' : 'no-cualificado',
     s2.value.urgency === 'immediate' ? 'urgente' : 'no-urgente',
   ]
 }
@@ -172,11 +172,11 @@ async function submitS2() {
           email: s1.value.email.trim(),
           phone,
           companyName: s1.value.company.trim(),
-          source: 'ale-barreto-web',
+          source: 'eat-web',
           // Datos de cualificación (Step 2)
-          '1. ¿Qué tipo de proyecto buscas?': s2.value.projectType,
-          '2. ¿Dispones de presupuesto integral?': s2.value.budget === 'yes' ? 'Sí' : 'No',
-          '3. ¿Cuál es tu objetivo principal?': s2.value.objective,
+          '1. ¿Cuántos colaboradores?': s2.value.projectType,
+          '2. ¿Cómo gestionan actualmente?': s2.value.budget,
+          '3. ¿Principal problema?': s2.value.objective,
           urgency: s2.value.urgency,
           message: s2.value.message.trim(),
           tags,
@@ -201,26 +201,29 @@ function goBack() {
 
 // ── Opciones step 2 ───────────────────────────────────────────────────────────
 const projectOpts = [
-  { value: 'Residencial (Casa / Departamento)', label: 'Residencial (Casa / Departamento)' },
-  { value: 'Oficina / Corporativo', label: 'Oficina / Corporativo' },
-  { value: 'Local Comercial / Restaurante', label: 'Local Comercial / Restaurante' },
-  { value: 'Otro', label: 'Otro' },
+  { value: 'less-15', label: 'Menos de 15' },
+  { value: '15-50', label: '15 a 50' },
+  { value: '51-100', label: '51 a 100' },
+  { value: 'more-100', label: 'Más de 100' },
 ]
 
 const budgetOpts = [
-  { value: 'yes', label: 'Sí, dispongo del presupuesto para una obra/remodelación integral' },
-  { value: 'no', label: 'No, busco la opción más económica' },
+  { value: 'catering', label: 'Catering tradicional / Viandas en serie' },
+  { value: 'individual', label: 'Cada colaborador busca su comida' },
+  { value: 'internal', label: 'Contamos con un comedor / buffet interno' },
+  { value: 'first-time', label: 'Buscamos implementarlo por primera vez' },
 ]
 
 const objectiveOpts = [
-  { value: 'Tener un solo equipo que planifique y ejecute todo el proceso.', label: 'Tener un solo equipo que planifique y ejecute todo el proceso.' },
-  { value: 'Coordinar yo mismo con diferentes proveedores.', label: 'Coordinar yo mismo con diferentes proveedores (Diseñador, Constructor, etc).' },
-  { value: 'Busco acabados de alto nivel y tranquilidad durante la obra.', label: 'Busco acabados de alto nivel y tranquilidad durante la obra.' },
+  { value: 'complaints', label: 'Quejas por comida monótona, fría o sin sabor' },
+  { value: 'allergies', label: 'Falta de personalización (alergias, dietas)' },
+  { value: 'waste', label: 'Desperdicio de presupuesto' },
+  { value: 'logistics', label: 'Problemas logísticos o impuntualidad' },
 ]
 
 const urgencyOpts = [
-  { value: 'immediate', label: 'Necesito ayuda inmediata', sub: 'Contacto en menos de 24 h' },
-  { value: 'next-month', label: 'Lo necesito en el próximo mes', sub: 'Estoy evaluando opciones' },
+  { value: 'immediate', label: 'Lo antes posible', sub: 'Contacto en menos de 24 h' },
+  { value: 'next-month', label: 'En el próximo mes', sub: 'Estoy evaluando opciones' },
   { value: 'just-looking', label: 'Solo estoy explorando por ahora', sub: 'Sin urgencia particular' },
 ]
 </script>
@@ -349,7 +352,7 @@ const urgencyOpts = [
         <!-- Q1: Proyecto -->
         <div class="wf-question">
           <p class="wf-q-num">01</p>
-          <p class="wf-q-title">¿Qué tipo de proyecto buscas realizar?</p>
+          <p class="wf-q-title">¿Cuántos colaboradores trabajan presencialmente en tu empresa?</p>
           <label
             v-for="opt in projectOpts"
             :key="opt.value"
@@ -365,7 +368,7 @@ const urgencyOpts = [
         <!-- Q2: Presupuesto -->
         <div class="wf-question">
           <p class="wf-q-num">02</p>
-          <p class="wf-q-title">¿Dispones del presupuesto para una obra o remodelación integral?</p>
+          <p class="wf-q-title">¿Cómo gestionan actualmente la alimentación de su personal?</p>
           <label
             v-for="opt in budgetOpts"
             :key="opt.value"
@@ -381,7 +384,7 @@ const urgencyOpts = [
         <!-- Q3: Objetivo -->
         <div class="wf-question">
           <p class="wf-q-num">03</p>
-          <p class="wf-q-title">¿Cuál es tu objetivo principal con este proyecto?</p>
+          <p class="wf-q-title">¿Cuál es el principal problema que enfrentan hoy con los almuerzos?</p>
           <label
             v-for="opt in objectiveOpts"
             :key="opt.value"
@@ -397,7 +400,7 @@ const urgencyOpts = [
         <!-- Q4: Urgencia -->
         <div class="wf-question">
           <p class="wf-q-num">04</p>
-          <p class="wf-q-title">¿Con qué urgencia necesitas este servicio?</p>
+          <p class="wf-q-title">¿Con qué urgencia buscan implementar o mejorar su sistema de alimentación corporativa?</p>
           <label
             v-for="opt in urgencyOpts"
             :key="opt.value"

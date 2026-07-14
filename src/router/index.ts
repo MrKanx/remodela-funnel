@@ -31,14 +31,14 @@ const router = createRouter({
       name: 'funnel',
       component: FunnelView,
       meta: {
-        title: 'Línea Viva | Construir o remodelar el espacio de tus sueños',
+        title: 'EAT | Transforma el almuerzo de tu equipo',
         description:
-          'Transformamos tu espacio con la metodología Línea Viva 360. Un solo equipo planifica, ejecuta y responde por tu proyecto completo.',
-        canonical: 'https://lineaviva.com/',
-        ogTitle: 'Línea Viva | Construir o remodelar el espacio de tus sueños',
+          'Transformamos tu flujo alimentario con el método Corporate Food Flow. Un solo equipo planifica y ejecuta todo el proceso.',
+        canonical: 'https://eat.com/',
+        ogTitle: 'EAT | Transforma el almuerzo de tu equipo',
         ogDescription:
-          'Transformamos tu espacio con la metodología Línea Viva 360. Un solo equipo planifica, ejecuta y responde por tu proyecto completo.',
-        ogUrl: 'https://lineaviva.com/',
+          'Transformamos tu flujo alimentario con el método Corporate Food Flow. Un solo equipo planifica y ejecuta todo el proceso.',
+        ogUrl: 'https://eat.com/',
       } satisfies RouteMeta,
     },
     {
@@ -46,12 +46,12 @@ const router = createRouter({
       name: 'video',
       component: VideoView,
       meta: {
-        title: 'Mira el video | Línea Viva — Paso 1 de 2',
-        description: 'Descubre cómo construir o remodelar sin estrés con la metodología Línea Viva 360.',
-        canonical: 'https://lineaviva.com/ver-video',
-        ogTitle: 'Mira el video | Línea Viva',
-        ogDescription: 'Ve el video y agenda tu sesión con nuestro equipo.',
-        ogUrl: 'https://lineaviva.com/ver-video',
+        title: 'Mira el video | EAT — Paso 1 de 2',
+        description: 'Descubre cómo implementar tu sistema de alimentación sin estrés con el método Corporate Food Flow.',
+        canonical: 'https://eat.com/ver-video',
+        ogTitle: 'Mira el video | EAT',
+        ogDescription: 'Ve el video y agenda tu diagnóstico corporativo.',
+        ogUrl: 'https://eat.com/ver-video',
       } satisfies RouteMeta,
     },
     {
@@ -59,12 +59,12 @@ const router = createRouter({
       name: 'booking',
       component: BookingView,
       meta: {
-        title: 'Agenda tu Sesión | Línea Viva — Paso 2 de 2',
-        description: 'Selecciona el día y hora para tu sesión de evaluación de proyecto.',
-        canonical: 'https://lineaviva.com/agendar',
-        ogTitle: 'Agenda tu Sesión | Línea Viva',
-        ogDescription: 'Elige tu horario y reserva tu sesión.',
-        ogUrl: 'https://lineaviva.com/agendar',
+        title: 'Agenda tu Sesión | EAT — Paso 2 de 2',
+        description: 'Selecciona el día y hora para tu diagnóstico corporativo.',
+        canonical: 'https://eat.com/agendar',
+        ogTitle: 'Agenda tu Sesión | EAT',
+        ogDescription: 'Elige tu horario y reserva tu diagnóstico corporativo.',
+        ogUrl: 'https://eat.com/agendar',
       } satisfies RouteMeta,
     },
     {
@@ -72,12 +72,12 @@ const router = createRouter({
       name: 'booked',
       component: BookedView,
       meta: {
-        title: 'Sesión Confirmada | Línea Viva',
-        description: 'Tu sesión con Línea Viva está confirmada. Revisa tu correo.',
-        canonical: 'https://lineaviva.com/cita-confirmada',
-        ogTitle: 'Sesión Confirmada | Línea Viva',
-        ogDescription: 'Tu sesión está reservada. Te contactaremos pronto.',
-        ogUrl: 'https://lineaviva.com/cita-confirmada',
+        title: 'Sesión Confirmada | EAT',
+        description: 'Tu diagnóstico con EAT está confirmado. Revisa tu correo.',
+        canonical: 'https://eat.com/cita-confirmada',
+        ogTitle: 'Sesión Confirmada | EAT',
+        ogDescription: 'Tu diagnóstico está reservado. Te contactaremos pronto.',
+        ogUrl: 'https://eat.com/cita-confirmada',
       } satisfies RouteMeta,
     },
     {
@@ -85,12 +85,12 @@ const router = createRouter({
       name: 'no-space',
       component: NoSpaceView,
       meta: {
-        title: 'Sin Cupos Disponibles | Línea Viva',
-        description: 'En este momento los cupos para proyectos de Línea Viva están completos.',
-        canonical: 'https://lineaviva.com/sin-espacio',
-        ogTitle: 'Sin Cupos Disponibles | Línea Viva',
-        ogDescription: 'Los cupos para nuevos proyectos están completos. Te avisaremos cuando haya disponibilidad.',
-        ogUrl: 'https://lineaviva.com/sin-espacio',
+        title: 'Sin Cupos Disponibles | EAT',
+        description: 'En este momento los cupos para proyectos de EAT están completos.',
+        canonical: 'https://eat.com/sin-espacio',
+        ogTitle: 'Sin Cupos Disponibles | EAT',
+        ogDescription: 'Los cupos para nuevas cuentas corporativas están completos. Te avisaremos cuando haya disponibilidad.',
+        ogUrl: 'https://eat.com/sin-espacio',
       } satisfies RouteMeta,
     },
     {
@@ -98,12 +98,12 @@ const router = createRouter({
       name: 'privacy-policy',
       component: PrivacyPolicyView,
       meta: {
-        title: 'Política de Privacidad | Línea Viva',
-        description: 'Política de privacidad de Línea Viva. Información sobre el tratamiento de datos personales.',
-        canonical: 'https://lineaviva.com/politicas-privacidad',
-        ogTitle: 'Política de Privacidad | Línea Viva',
-        ogDescription: 'Política de privacidad de Línea Viva.',
-        ogUrl: 'https://lineaviva.com/politicas-privacidad',
+        title: 'Política de Privacidad | EAT',
+        description: 'Política de privacidad de EAT. Información sobre el tratamiento de datos personales.',
+        canonical: 'https://eat.com/politicas-privacidad',
+        ogTitle: 'Política de Privacidad | EAT',
+        ogDescription: 'Política de privacidad de EAT.',
+        ogUrl: 'https://eat.com/politicas-privacidad',
       } satisfies RouteMeta,
     },
     {
@@ -111,12 +111,12 @@ const router = createRouter({
       name: 'legal-notice',
       component: LegalNoticeView,
       meta: {
-        title: 'Aviso Legal | Línea Viva',
-        description: 'Aviso legal de Línea Viva. Términos y condiciones de uso del sitio web.',
-        canonical: 'https://lineaviva.com/aviso-legal',
-        ogTitle: 'Aviso Legal | Línea Viva',
-        ogDescription: 'Aviso legal de Línea Viva.',
-        ogUrl: 'https://lineaviva.com/aviso-legal',
+        title: 'Aviso Legal | EAT',
+        description: 'Aviso legal de EAT. Términos y condiciones de uso del sitio web.',
+        canonical: 'https://eat.com/aviso-legal',
+        ogTitle: 'Aviso Legal | EAT',
+        ogDescription: 'Aviso legal de EAT.',
+        ogUrl: 'https://eat.com/aviso-legal',
       } satisfies RouteMeta,
     },
   ],
@@ -143,7 +143,7 @@ const setCanonical = (href: string) => {
 
 router.afterEach((to) => {
   const meta = to.meta
-  document.title = meta.title ?? 'Línea Viva'
+  document.title = meta.title ?? 'EAT'
   setMeta('description', meta.description ?? '')
   setOgMeta('og:title', meta.ogTitle ?? meta.title ?? '')
   setOgMeta('og:description', meta.ogDescription ?? meta.description ?? '')

@@ -113,7 +113,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   <div class="vv-page">
 
     <header class="vv-topbar">
-      <span class="vv-topbar__logo-text">LÍNEA<span class="vv-topbar__logo-accent">VIVA</span></span>
+      <span class="vv-topbar__logo-text">E<span class="vv-topbar__logo-accent">AT</span></span>
     </header>
 
     <main class="vv-main">
@@ -128,18 +128,17 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 
       <section class="vv-headline">
         <h1 class="vv-h1">
-          Descubre por qué cientos de clientes
-          <span class="vv-accent">eligen Línea Viva 360</span>
+          Transforma el almuerzo de tu equipo de un gasto logístico a una
+          <span class="vv-accent">herramienta estratégica de alto rendimiento</span>
         </h1>
         <p class="vv-subtitle">
-          Ve el video completo y descubre cómo construir o remodelar sin complicaciones,
-          ahorrar tiempo y dinero, y asegurar un acabado de alto nivel.
+          Descubre cómo el método Corporate Food Flow elimina las quejas, reduce el desperdicio y motiva a tus colaboradores con sabor real de hogar.
         </p>
       </section>
 
       <div class="vv-video-wrapper">
         <div class="vv-video-ratio">
-          <wistia-player media-id="qlg8athp0s" aspect="1.7777777777777777"></wistia-player>
+          <wistia-player media-id="c0iw8b7y8t" aspect="1.7777777777777777"></wistia-player>
         </div>
       </div>
 
@@ -183,7 +182,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="vv-footer__copy">© {{ new Date().getFullYear() }} LÍNEA VIVA. Todos los derechos reservados.</p>
+      <p class="vv-footer__copy">© {{ new Date().getFullYear() }} EAT. Todos los derechos reservados.</p>
       <p class="vv-footer__dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 

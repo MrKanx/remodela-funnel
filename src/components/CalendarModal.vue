@@ -33,7 +33,8 @@ const isValid = () =>
   form.value.consent
 
 const qualifies = () => {
-  if (form.value.presupuesto === 'no') return false
+  if (form.value.nivel === 'menos-15') return false
+  if (form.value.viaje === 'explorando') return false
   return true
 }
 
@@ -47,46 +48,46 @@ const handleSubmit = async () => {
   const scheduleEventId = generateEventId('schedule')
 
   const nivelLabel: Record<string, string> = {
-    remodelacion: 'Remodelación',
-    construccion: 'Construcción desde cero',
-    comercial: 'Comercial / Oficinas',
-    otro: 'Otro',
+    'menos-15': 'Menos de 15',
+    '15-50': '15 a 50',
+    '51-100': '51 a 100',
+    'mas-100': 'Más de 100',
   }
   const viajeLabel: Record<string, string> = {
     inmediato: 'Lo antes posible',
-    meses6: 'En 3 a 6 meses',
-    ano1: 'En 1 año',
-    explorando: 'Aún explorando opciones',
+    'mes-proximo': 'En el próximo mes',
+    explorando: 'Solo explorando',
   }
   const presupuestoLabel: Record<string, string> = {
-    si: 'Sí, dispongo del presupuesto',
-    financiamiento: 'Necesito financiamiento',
-    no: 'Aún no lo defino',
+    catering: 'Catering / Viandas en serie',
+    individual: 'Cada colaborador busca',
+    comedor: 'Comedor interno',
+    'primera-vez': 'Primera vez',
   }
 
   const etiquetas = [
-    'funnel-LINEA-VIVA',
+    'funnel-eat',
     'step-2-cualificacion',
-    califica ? 'califica-LINEA-VIVA' : 'no-califica-LINEA-VIVA',
+    califica ? 'califica-eat' : 'no-califica-eat',
     `tipo-${form.value.nivel}`,
     `inicio-${form.value.viaje}`,
-    `presupuesto-${form.value.presupuesto}`,
+    `gestion-${form.value.presupuesto}`,
   ]
 
   const notas = `
 ━━━━━━━━━━━━━━━━━━━━━━━━
-LÍNEA VIVA — Cualificación
+EAT — Cualificación
 ━━━━━━━━━━━━━━━━━━━━━━━━
 👤 ${contact.nombre} ${contact.apellido}
 📧 ${contact.email}
 📱 ${contact.telefono}
 ━━━━━━━━━━━━━━━━━━━━━━━━
-🏗️ Proyecto: ${nivelLabel[form.value.nivel] ?? form.value.nivel}
-⏱️ Inicio: ${viajeLabel[form.value.viaje] ?? form.value.viaje}
-💰 Presupuesto: ${presupuestoLabel[form.value.presupuesto] ?? form.value.presupuesto}
-💡 Desafío/Miedo: ${form.value.reto}
+👥 Personal: ${form.value.nivel}
+⏱️ Urgencia: ${form.value.viaje}
+🍲 Gestión Actual: ${form.value.presupuesto}
+💡 Desafío: ${form.value.reto}
 ━━━━━━━━━━━━━━━━━━━━━━━━
-${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Falta presupuesto'}
+${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Falta de personal'}
   `.trim()
 
   const pageEntry = Number(sessionStorage.getItem('alu_page_entry')) || Date.now()
@@ -117,7 +118,7 @@ ${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Falta presupuesto'}
 
   trackStage('cualificacion_completada', payload)
 
-  const webhookUrl = import.meta.env.VITE_WEBHOOK_CALIFICACION ?? 'https://services.leadconnectorhq.com/hooks/kRY63aQkg8qTWBUbwreY/webhook-trigger/U5u6toL5UVsd4tiFBL6q'
+  const webhookUrl = import.meta.env.VITE_WEBHOOK_CALIFICACION ?? 'https://services.leadconnectorhq.com/hooks/kU4URJgWDNYci1iLXzD8/webhook-trigger/yWmEJHsLZ2oDn7PyuT9Y'
   await fetch(webhookUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -177,9 +178,9 @@ watch(() => props.open, (v) => {
             </div>
             <h2 id="cal-title" class="cal-title">
               Antes de agendar, cuéntanos sobre
-              <span class="cal-accent">tu proyecto</span>
+              <span class="cal-accent">tu equipo</span>
             </h2>
-            <p class="cal-subtitle">4 breves preguntas para preparar tu asesoría.</p>
+            <p class="cal-subtitle">4 breves preguntas para preparar tu diagnóstico corporativo.</p>
           </div>
 
           <form class="cal-form" @submit.prevent="handleSubmit" novalidate>
@@ -188,14 +189,14 @@ watch(() => props.open, (v) => {
             <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.nivel }">
               <legend class="cal-legend">
                 <span class="cal-q-num">01</span>
-                ¿Qué tipo de proyecto deseas realizar?
+                ¿Cuántos colaboradores trabajan presencialmente?
               </legend>
               <div class="cal-options">
                 <label v-for="opt in [
-                  { value: 'remodelacion', label: 'Remodelación residencial' },
-                  { value: 'construccion', label: 'Construcción desde cero' },
-                  { value: 'comercial', label: 'Proyecto Comercial / Oficinas' },
-                  { value: 'otro', label: 'Otro' },
+                  { value: 'menos-15', label: 'Menos de 15' },
+                  { value: '15-50', label: '15 a 50' },
+                  { value: '51-100', label: '51 a 100' },
+                  { value: 'mas-100', label: 'Más de 100' },
                 ]" :key="opt.value" class="cal-option" :class="{ selected: form.nivel === opt.value }">
                   <input type="radio" :value="opt.value" v-model="form.nivel" hidden />
                   <span class="cal-option__radio" aria-hidden="true" />
@@ -209,14 +210,13 @@ watch(() => props.open, (v) => {
             <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.viaje }">
               <legend class="cal-legend">
                 <span class="cal-q-num">02</span>
-                ¿Para cuándo planeas iniciar la obra o el proyecto?
+                ¿Con qué urgencia buscan implementar la solución?
               </legend>
               <div class="cal-options">
                 <label v-for="opt in [
                   { value: 'inmediato', label: 'Lo antes posible' },
-                  { value: 'meses6', label: 'En 3 a 6 meses' },
-                  { value: 'ano1', label: 'En 1 año' },
-                  { value: 'explorando', label: 'Aún explorando opciones' },
+                  { value: 'mes-proximo', label: 'En el próximo mes' },
+                  { value: 'explorando', label: 'Solo estoy explorando por ahora' },
                 ]" :key="opt.value" class="cal-option" :class="{ selected: form.viaje === opt.value }">
                   <input type="radio" :value="opt.value" v-model="form.viaje" hidden />
                   <span class="cal-option__radio" aria-hidden="true" />
@@ -230,14 +230,15 @@ watch(() => props.open, (v) => {
             <fieldset class="cal-fieldset cal-fieldset--budget" :class="{ 'has-error': touched && !form.presupuesto, 'has-investment': form.presupuesto && form.presupuesto !== 'no' }">
               <legend class="cal-legend cal-legend--budget">
                 <span class="cal-q-num cal-q-num--budget">03</span>
-                <span>¿Cuentas con el presupuesto necesario para tu proceso?</span>
-                <i class="fa-solid fa-wallet cal-legend-chart" aria-hidden="true"></i>
+                <span>¿Cómo gestionan actualmente la alimentación?</span>
+                <i class="fa-solid fa-utensils cal-legend-chart" aria-hidden="true"></i>
               </legend>
               <div class="cal-options">
                 <label v-for="opt in [
-                  { value: 'si', label: 'Sí, dispongo del presupuesto', premium: true },
-                  { value: 'financiamiento', label: 'Necesito financiamiento', premium: false },
-                  { value: 'no', label: 'Aún no tengo un presupuesto definido', premium: false },
+                  { value: 'catering', label: 'Catering tradicional / Viandas en serie', premium: true },
+                  { value: 'individual', label: 'Cada colaborador busca su comida', premium: false },
+                  { value: 'comedor', label: 'Contamos con un comedor / buffet interno', premium: true },
+                  { value: 'primera-vez', label: 'Buscamos implementarlo por primera vez', premium: false },
                 ]" :key="opt.value" class="cal-option" :class="{
                   selected: form.presupuesto === opt.value,
                   'cal-option--premium': opt.premium && form.presupuesto === opt.value,
@@ -257,12 +258,12 @@ watch(() => props.open, (v) => {
             <fieldset class="cal-fieldset" :class="{ 'has-error': touched && wordCount(form.reto) < 5 }">
               <legend class="cal-legend">
                 <span class="cal-q-num">04</span>
-                ¿Cuál es tu principal desafío o miedo respecto a construir o remodelar?
+                ¿Cuál es el principal problema que enfrentan actualmente?
               </legend>
               <textarea
                 v-model="form.reto"
                 class="cal-textarea"
-                placeholder="Ej: Tengo miedo de que la obra se atrase, me cobren de más o los contratistas me queden mal..."
+                placeholder="Ej: Tengo quejas por la comida fría, o tenemos casos de intolerancias y alergias no atendidas..."
                 rows="4"
                 aria-describedby="q4-hint"
               ></textarea>
@@ -279,7 +280,7 @@ watch(() => props.open, (v) => {
               <input type="checkbox" v-model="form.consent" />
               <span class="cal-consent__box" aria-hidden="true" />
               <span class="cal-consent__text">
-                Acepto que Línea Viva me contacte para agendar mi sesión de asesoría.
+                Acepto que EAT me contacte para agendar mi diagnóstico corporativo.
               </span>
             </label>
             <span v-if="touched && !form.consent" class="cal-error">Debes aceptar para continuar</span>

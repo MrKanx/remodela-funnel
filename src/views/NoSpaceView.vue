@@ -29,7 +29,7 @@ onMounted(() => {
   <div class="nospace">
 
     <header class="nospace__topbar">
-      <span class="nospace__logo-text">LÍNEA<span class="nospace__logo-accent">VIVA</span></span>
+      <span class="nospace__logo-text">E<span class="nospace__logo-accent">AT</span></span>
     </header>
 
     <main class="nospace__main">
@@ -49,16 +49,13 @@ onMounted(() => {
           <i class="fa-solid fa-calendar-xmark nospace__icon"></i>
         </div>
 
-        <h1 class="nospace__title">Cupos completos para sesiones iniciales</h1>
+        <h1 class="nospace__title">
+          Lo sentimos, nuestros cupos<br>
+          de EAT están completos.
+        </h1>
 
         <p class="nospace__body">
-          Nuestro equipo de arquitectura y diseño tiene una capacidad limitada para mantener la calidad
-          de ejecución que nos distingue. En este momento los <strong>cupos mensuales</strong>
-          de Línea Viva están completos.
-        </p>
-
-        <p class="nospace__body">
-          Cuando se libere un espacio, podrás agendar tu sesión de evaluación de proyecto
+          Cuando se libere un espacio, podrás agendar tu diagnóstico corporativo
           sin costo.
         </p>
 
@@ -66,14 +63,14 @@ onMounted(() => {
 
         <h2 class="nospace__subtitle">Mientras tanto</h2>
         <p class="nospace__body">
-          Mientras esperas, te recomendamos preparar cualquier duda técnica que
-          quieras resolver en tu sesión con nuestro equipo para tu futura remodelación o construcción.
+          Mientras esperas, te recomendamos preparar información sobre tu flujo alimentario actual y
+          cualquier duda técnica que quieras resolver en tu sesión con nuestro equipo corporativo.
         </p>
       </div>
 
       <p class="nospace__footer-note">
         <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-        Línea Viva asume un número limitado de proyectos integrales para asegurar el mejor resultado y respaldo. Te notificaremos en cuanto haya disponibilidad.
+        EAT asume un número limitado de cuentas corporativas para asegurar la calidad de nuestro servicio de alimentación. Te notificaremos en cuanto haya disponibilidad.
       </p>
 
     </main>
@@ -83,7 +80,7 @@ onMounted(() => {
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="nospace__footer-copy">© {{ new Date().getFullYear() }} LÍNEA VIVA. Todos los derechos reservados.</p>
+      <p class="nospace__footer-copy">© {{ new Date().getFullYear() }} EAT. Todos los derechos reservados.</p>
     </footer>
 
   </div>

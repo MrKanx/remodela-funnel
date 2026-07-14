@@ -43,8 +43,8 @@ const nextSteps = [
   },
   {
     icon: 'fa-brands fa-whatsapp',
-    title: 'Te contactamos por WhatsApp',
-    body: 'El equipo de Línea Viva te escribirá para confirmar la cita y enviarte el enlace o coordinar la visita.',
+    title: 'Tu diagnóstico gratuito con EAT está agendado',
+    body: 'El equipo de EAT te escribirá para confirmar la cita y enviarte el enlace o coordinar la visita.',
   },
   {
     icon: 'fa-solid fa-file-invoice',
@@ -58,7 +58,7 @@ const nextSteps = [
   <div class="booked">
 
     <header class="booked__topbar">
-      <span class="booked__logo-text">LÍNEA<span class="booked__logo-accent">VIVA</span></span>
+      <span class="booked__logo-text">E<span class="booked__logo-accent">AT</span></span>
     </header>
 
     <main class="booked__main">
@@ -82,8 +82,8 @@ const nextSteps = [
             </template>
           </h1>
           <p class="booked__hero-subtitle">
-            Tu sesión inicial con Línea Viva está confirmada. Revisa tu correo
-            o WhatsApp para todos los detalles. Si necesitas reagendar, escríbenos.
+            Tu diagnóstico inicial con EAT está confirmado. Revisa tu correo
+            para los detalles. Te contactaremos pronto para confirmar tu asistencia.
           </p>
         </template>
 
@@ -97,8 +97,8 @@ const nextSteps = [
             </template>
           </h1>
           <p class="booked__hero-subtitle">
-            Tu sesión con el equipo de Línea Viva ha sido agendada correctamente.
-            En breve recibirás todos los detalles para conectarte.
+            Tu sesión con el equipo de EAT ha sido agendada correctamente.
+            Revisa tu correo para más información y te escribiremos para confirmar.
           </p>
         </template>
       </section>
@@ -124,7 +124,7 @@ const nextSteps = [
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="booked__footer-copy">© {{ new Date().getFullYear() }} LÍNEA VIVA. Todos los derechos reservados.</p>
+      <p class="booked__footer-copy">© {{ new Date().getFullYear() }} EAT. Todos los derechos reservados.</p>
       <p class="booked__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 

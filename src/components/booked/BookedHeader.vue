@@ -5,7 +5,7 @@ const LOGO = 'https://res.cloudinary.com/dpuody0df/image/upload/v1775587085/baka
 <template>
   <header class="booked-header">
     <div class="booked-header__logo-wrap">
-      <span class="booked-header__logo-text">LÍNEA<span class="booked-header__logo-accent">VIVA</span></span>
+      <span class="booked-header__logo-text">E<span class="booked-header__logo-accent">AT</span></span>
     </div>
   </header>
 </template>

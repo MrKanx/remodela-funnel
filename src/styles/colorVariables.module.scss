@@ -1,19 +1,27 @@
-// LINEA VIVA / Construction & Remodeling Colors
-$S2M-DARK-BLUE:   #1F2937; // Charcoal Text (was Dark Blue)
-$S2M-GOLD:        #C28F59; // Earthy accent (Warm Wood / Terracotta)
-$S2M-WHITE:       #FFFFFF; // Clarity (Surfaces)
-$S2M-GRAY-LIGHT:  #F9FAFB; // Warm Off-White (Backgrounds)
-$S2M-GRAY-DARK:   #E5E7EB; // Light Borders
-$S2M-ACCENT:      #4A5D4E; // Muted Sage Green / Architecture Green
+// EAT Corporate Food Colors (Pastel Theme)
+$EAT-DARK:        #4A4A4A; // Dark Slate Text
+$EAT-ACCENT:      #FFB7B2; // Pastel Peach / Orange
+$EAT-WHITE:       #FFFFFF; // Clarity (Surfaces)
+$EAT-GRAY-LIGHT:  #F9FAFB; // Off-White (Backgrounds)
+$EAT-GRAY-DARK:   #E5E7EB; // Light Borders
+$EAT-PRIMARY:     #B5EAD7; // Pastel Green
+
+// S2M Aliases for backward compatibility
+$S2M-DARK-BLUE:   $EAT-DARK;
+$S2M-GOLD:        $EAT-ACCENT;
+$S2M-WHITE:       $EAT-WHITE;
+$S2M-GRAY-LIGHT:  $EAT-GRAY-LIGHT;
+$S2M-GRAY-DARK:   $EAT-GRAY-DARK;
+$S2M-ACCENT:      $EAT-PRIMARY;
 
 // Mapeo a las variables del sistema (manteniendo los nombres para no romper UI legacy de ser necesario)
-$QS-NAVY:    $S2M-DARK-BLUE;  // Text/Brand
-$QS-BLUE:    $S2M-ACCENT;     // Secundario
-$QS-GOLD:    $S2M-GOLD;       // Acento
-$QS-RED:     $S2M-GOLD;       // CTAs
-$QS-DARK:    $S2M-DARK-BLUE;  // Texto principal
-$QS-LIGHT:   $S2M-GRAY-LIGHT; // Fondo principal
-$QS-SURFACE: $S2M-WHITE;      // Superficies/cards claras
+$QS-NAVY:    $EAT-DARK;       // Text/Brand
+$QS-BLUE:    $EAT-PRIMARY;    // Secundario
+$QS-GOLD:    $EAT-ACCENT;     // Acento
+$QS-RED:     $EAT-ACCENT;     // CTAs
+$QS-DARK:    $EAT-DARK;       // Texto principal
+$QS-LIGHT:   $EAT-GRAY-LIGHT; // Fondo principal
+$QS-SURFACE: $EAT-WHITE;      // Superficies/cards claras
 
 // Urgency / inmediatez
 $QS-URGENT:        #B45309; // Amber-700
@@ -62,8 +70,8 @@ $OS-DARK:  $QS-DARK;
 
 // Colores base
 $white: #ffffff;
-$text-light: $S2M-DARK-BLUE; // Mantenemos el nombre pero invertimos el uso para texto
-$overlay-wood: rgba($S2M-GOLD, 0.05);
+$text-light: $EAT-DARK; // Mantenemos el nombre pero invertimos el uso para texto
+$overlay-wood: rgba($EAT-ACCENT, 0.05);
 
 // Colores adicionales para UI
 $gray-100: #f8f9fa;

@@ -63,20 +63,20 @@ const form = ref({
 
 const URGENCY_LABEL: Record<Exclude<Urgency, ''>, string> = {
   inmediato: 'Lo antes posible',
-  proximos: 'En los próximos 1–3 meses',
-  planificando: 'En 3–6 meses',
-  explorando: 'Solo estoy explorando opciones',
+  proximos: 'En el próximo mes',
+  planificando: 'Buscando opciones',
+  explorando: 'Solo explorando',
 }
 
 const urgencyOpts: { value: Exclude<Urgency, ''>; label: string; sub: string; hot?: boolean }[] = [
-  { value: 'inmediato',   label: 'Lo antes posible', sub: 'Urgencia alta — quiero iniciar pronto', hot: true },
-  { value: 'proximos',    label: 'En los próximos 1–3 meses',      sub: 'Planificación cercana' },
-  { value: 'planificando',label: 'En 3–6 meses',                   sub: 'Sin prisa' },
-  { value: 'explorando',  label: 'Solo estoy explorando',          sub: 'Sin urgencia particular' },
+  { value: 'inmediato',   label: 'Lo antes posible', sub: 'Urgencia alta', hot: true },
+  { value: 'proximos',    label: 'En el próximo mes', sub: 'Planificando pronto' },
+  { value: 'planificando',label: 'Buscando opciones', sub: 'Aún evaluando' },
+  { value: 'explorando',  label: 'Solo estoy explorando', sub: 'Sin urgencia' },
 ]
 
 function calcTags(urgency: Urgency): string[] {
-  const base = ['Línea Viva', 'funnel-registro']
+  const base = ['EAT', 'funnel-registro']
   if (urgency === 'inmediato')    return [...base, 'urgente', 'contrato-inmediato']
   if (urgency === 'proximos')     return [...base, 'urgencia-media']
   if (urgency === 'planificando') return [...base, 'planificando']
@@ -89,7 +89,7 @@ function buildNote(f: typeof form.value, country: string, pageDuration: number):
   const secs = pageDuration % 60
   return [
     '━━━━━━━━━━━━━━━━━━━━━━━━',
-    'LÍNEA VIVA — Registro Inicial',
+    'EAT — Registro Inicial',
     '━━━━━━━━━━━━━━━━━━━━━━━━',
     `👤 ${f.nombre} ${f.apellido}`,
     `📧 ${f.email}`,
@@ -147,8 +147,8 @@ const validators: Record<string, (v: string) => string | null> = {
   apellido: v => v.trim().length < 2 ? 'Ingresa tu apellido' : null,
   email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? null : 'Email inválido',
   phone: () => phoneValid.value ? null : 'Número inválido para el país seleccionado',
-  empresa: v => v.trim().length < 2 ? 'Ingresa el tipo de proyecto' : null,
-  urgencia: v => !v ? 'Selecciona cuándo planeas iniciar' : null,
+  empresa: v => v.trim().length < 2 ? 'Ingresa el nombre de tu empresa' : null,
+  urgencia: v => !v ? 'Selecciona la urgencia' : null,
 }
 
 const validate = () => {
@@ -231,7 +231,7 @@ const handleSubmit = async () => {
 
   console.info('[LINEA VIVA Registro]', payload)
 
-  const webhookUrl = import.meta.env.VITE_WEBHOOK_REGISTRO ?? 'https://services.leadconnectorhq.com/hooks/kRY63aQkg8qTWBUbwreY/webhook-trigger/oANJcBb9A0xv0AGpeeoU'
+  const webhookUrl = import.meta.env.VITE_WEBHOOK_REGISTRO ?? 'https://services.leadconnectorhq.com/hooks/kU4URJgWDNYci1iLXzD8/webhook-trigger/u8Vy6B5d6kw7lZqNjJ9Z'
   await fetch(webhookUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -309,9 +309,9 @@ watch(dropdownOpen, open => {
           </button>
 
           <div class="rmodal__header">
-            <p class="rmodal__eyebrow">CONSTRUCCIÓN Y REMODELACIÓN</p>
+            <p class="rmodal__eyebrow">CATERING CORPORATIVO</p>
             <h2 id="rmodal-title" class="rmodal__title">Accede al video<br><span class="rmodal__title-accent">gratuito</span></h2>
-            <p class="rmodal__subtitle">Descubre el Método Línea Viva 360 para tu proyecto.</p>
+            <p class="rmodal__subtitle">Descubre el Método Corporate Food Flow para tu equipo.</p>
           </div>
 
           <form class="rmodal__form" @submit.prevent="handleSubmit" novalidate>
@@ -410,12 +410,12 @@ watch(dropdownOpen, open => {
 
             <!-- Empresa / Interés -->
             <div class="rmodal__field" :class="{ 'has-error': touched.empresa && errors.empresa }">
-              <label for="r-empresa">¿Qué tipo de proyecto tienes en mente?</label>
+              <label for="r-empresa">¿Cuál es el nombre de tu empresa?</label>
               <input
                 id="r-empresa"
                 v-model="form.empresa"
                 type="text"
-                placeholder="Ej: Remodelación de casa, construcción de local..."
+                placeholder="Ej: Acme Corp..."
                 autocomplete="organization"
                 @blur="onBlur('empresa')"
               />
@@ -426,7 +426,7 @@ watch(dropdownOpen, open => {
             <div class="rmodal__field rmodal__field--urgency" :class="{ 'has-error': touched.urgencia && errors.urgencia }">
               <label class="rmodal__urgency-label">
                 <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                ¿Cuándo planeas iniciar tu proyecto?
+                ¿Con qué urgencia buscan implementar la solución?
               </label>
               <div class="rmodal__urgency-opts" role="radiogroup">
                 <label

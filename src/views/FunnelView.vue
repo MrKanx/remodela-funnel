@@ -29,30 +29,30 @@ onMounted(() => {
       <!-- HEADER -->
       <header class="funnel__header">
         <div class="funnel__logo-wrap">
-          <span class="funnel__logo-text">LÍNEA<span class="funnel__logo-accent">VIVA</span></span>
+          <span class="funnel__logo-text">E<span class="funnel__logo-accent">AT</span></span>
         </div>
       </header>
 
       <!-- HERO -->
       <section class="funnel__hero">
         <h1 class="funnel__headline">
-          Construir o remodelar debería devolverte la ilusión, <span class="funnel__headline-accent">no quitarte la tranquilidad</span>
+          Alimentar a gran escala debería motivar a tu equipo, <span class="funnel__headline-accent">no ser un gasto que tolerar</span>
         </h1>
         
         <p class="funnel__hero-sub">
-          Descubre cómo la metodología Línea Viva 360 transforma tu proyecto con un solo equipo que planifica, coordina y responde por todo el proceso. Tu única preocupación debe ser disfrutar el resultado.
+          Descubre cómo el método Corporate Food Flow transforma el almuerzo en tu empresa con sabor a hogar, reduciendo el desperdicio y eliminando las quejas del personal.
         </p>
 
         <div class="funnel__content-grid">
           <!-- Text/Bullets first -->
           <div class="funnel__bullets-column">
             <div class="funnel__bullets-box">
-              <p class="funnel__bullets-title">Nuestra Metodología en 3 Pasos:</p>
+              <p class="funnel__bullets-title">Nuestro Método en 3 Pasos:</p>
               <ul class="funnel__bullets">
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Planificación Integral (BIM):</strong> Detectamos y corregimos cualquier error antes de tocar una sola pared, evitando sobrecostos.</li>
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Organización y Control:</strong> No tienes que ser el coordinador de tu propia obra. Nosotros gestionamos todo.</li>
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Ejecución y Respaldo:</strong> Entregamos un proyecto bien hecho, con acabados de alto nivel y garantía total comprobada.</li>
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Cero Estrés:</strong> Olvídate del proceso fragmentado donde el diseñador y el constructor se culpan entre sí.</li>
+                <li><i class="fa-solid fa-circle-check"></i> <strong>Mapeo Biológico:</strong> Identificamos restricciones médicas y dietas de tu personal.</li>
+                <li><i class="fa-solid fa-circle-check"></i> <strong>Menú Adaptativo:</strong> Comida tipo buffet, completa y balanceada, con sabor a hogar.</li>
+                <li><i class="fa-solid fa-circle-check"></i> <strong>Control Térmico y Cero Desperdicio:</strong> Optimizamos la cadena logística, reduciendo hasta un 35% el desperdicio.</li>
+                <li><i class="fa-solid fa-circle-check"></i> <strong>Beneficio Real:</strong> Transforma la comida en un beneficio que tu gente sí valora.</li>
               </ul>
             </div>
           </div>
@@ -66,7 +66,7 @@ onMounted(() => {
                 </button>
                 <span class="funnel__vsl-msg">Haz clic para ver el video gratis</span>
               </div>
-              <img src="https://fast.wistia.com/embed/medias/qlg8athp0s/swatch" class="funnel__vsl-thumb" alt="Video de la metodología" />
+              <img src="https://fast.wistia.com/embed/medias/c0iw8b7y8t/swatch" class="funnel__vsl-thumb" alt="Video de la metodología" />
             </div>
 
             <button class="funnel__cta" @click="openModal">
@@ -87,18 +87,18 @@ onMounted(() => {
         <div class="funnel__stats-grid">
           <div class="funnel__stats-card">
             <div class="funnel__stats-icon"><i class="fa-solid fa-house-circle-check"></i></div>
-            <h3 class="funnel__stats-number">+100</h3>
-            <p class="funnel__stats-text">proyectos integrales entregados con acabados de primer nivel</p>
+            <h3 class="funnel__stats-number">-35%</h3>
+            <p class="funnel__stats-text">de reducción en desperdicio de comida corporativa</p>
           </div>
           <div class="funnel__stats-card">
             <div class="funnel__stats-icon"><i class="fa-solid fa-users-viewfinder"></i></div>
-            <h3 class="funnel__stats-number">1</h3>
-            <p class="funnel__stats-text">solo equipo responsable de coordinar toda la obra</p>
+            <h3 class="funnel__stats-number">98%</h3>
+            <p class="funnel__stats-text">de satisfacción interna en los colaboradores</p>
           </div>
           <div class="funnel__stats-card">
             <div class="funnel__stats-icon"><i class="fa-solid fa-star"></i></div>
-            <h3 class="funnel__stats-number">100%</h3>
-            <p class="funnel__stats-text">de garantía y respaldo total en cada entrega</p>
+            <h3 class="funnel__stats-number">0</h3>
+            <p class="funnel__stats-text">ausentismo vespertino por malestar estomacal</p>
           </div>
         </div>
       </section>
@@ -112,11 +112,11 @@ onMounted(() => {
             </div>
           </div>
           <div class="funnel__authority-content">
-            <p class="funnel__authority-eyebrow">Fundadora y Directora de Proyectos</p>
-            <h2 id="authority-heading" class="funnel__authority-name">Liset Morán</h2>
-            <p class="funnel__authority-role">Fundadora de Línea Viva 360</p>
+            <p class="funnel__authority-eyebrow">Fundadora de EAT</p>
+            <h2 id="authority-heading" class="funnel__authority-name">Sol Triviño</h2>
+            <p class="funnel__authority-role">CEO</p>
             <p class="funnel__authority-bio">
-              En Línea Viva sabemos que un buen proyecto no se demuestra con promesas, sino con resultados. El verdadero problema no es construir o remodelar, es hacerlo con un proceso fragmentado donde eres tú quien termina coordinándolo todo. <strong>Un proyecto bien hecho no solo transforma un espacio, también protege tu tiempo, tu inversión y la tranquilidad con la que disfrutas el resultado.</strong>
+              En EAT sabemos que la alimentación del personal es mucho más que un trámite logístico. Entregar viandas monótonas a tu equipo es una fuga de dinero. <strong>Nuestro objetivo es convertir el almuerzo en ingeniería de bienestar, dando a tu gente nutrición real y sabor de hogar.</strong>
             </p>
           </div>
         </div>
@@ -125,14 +125,14 @@ onMounted(() => {
       <!-- FINAL CTA -->
       <section class="funnel__final-cta">
         <div class="funnel__logo-wrap funnel__logo-wrap--large">
-          <span class="funnel__logo-text">LÍNEA<span class="funnel__logo-accent">VIVA</span>.</span>
+          <span class="funnel__logo-text">E<span class="funnel__logo-accent">AT</span></span>
         </div>
         <h2 class="funnel__final-title">
-          ¿Listo para disfrutar el proceso de<br>
-          <span class="funnel__final-accent">transformar tus espacios?</span>
+          ¿Listo para eliminar las quejas y<br>
+          <span class="funnel__final-accent">motivar a tu equipo?</span>
         </h2>
         <p class="funnel__final-sub">
-          Accede al video gratuito donde te explicamos por qué nuestra metodología Línea Viva 360 es la opción más segura para proteger tu tiempo e inversión.<br><br>
+          Accede al video gratuito donde te explicamos por qué nuestro método Corporate Food Flow es la opción más segura para proteger tu inversión en bienestar.<br><br>
         </p>
         <button class="funnel__cta funnel__cta--pulse" @click="openModal">
           <i class="fa-solid fa-video"></i>
@@ -156,7 +156,7 @@ onMounted(() => {
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="funnel__footer-copy">© {{ new Date().getFullYear() }} LÍNEA VIVA. Todos los derechos reservados.</p>
+      <p class="funnel__footer-copy">© {{ new Date().getFullYear() }} EAT. Todos los derechos reservados.</p>
       <p class="funnel__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 

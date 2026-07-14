@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const iframeHeight = ref(1100)
 
-const BASE_URL = 'https://api.leadconnectorhq.com/widget/booking/CixfVB6fljOxQsoT3Bab'
+const BASE_URL = 'https://api.leadconnectorhq.com/widget/booking/ldp9xYyX6UpQ38iToUvF'
 
 const calendarUrl = computed(() => {
   try {
@@ -57,7 +57,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
   <div class="booking">
 
     <header class="booking__topbar">
-      <span class="booking__logo-text">LÍNEA<span class="booking__logo-accent">VIVA</span></span>
+      <span class="booking__logo-text">E<span class="booking__logo-accent">AT</span></span>
     </header>
 
     <main class="booking__main">
@@ -87,8 +87,8 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
           Elige el horario de tu
           <span class="booking__title-accent">sesión inicial</span>
         </h1>
-        <p class="booking__subtitle">
-          Una sesión con el equipo de Línea Viva para conocer tu idea, evaluar tu proyecto y definir cómo construir o remodelar sin complicaciones.
+        <p class="booking__hero-subtitle">
+          Un diagnóstico con el equipo de EAT para conocer tu caso, evaluar tu flujo alimentario y definir cómo implementar un sistema corporativo sin complicaciones.
         </p>
       </section>
 
@@ -96,11 +96,11 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
         <iframe
           :src="calendarUrl"
           :style="{ height: iframeHeight + 'px' }"
-          title="Agenda tu sesión con Línea Viva"
+          title="Agenda tu sesión con EAT"
           class="calendar__iframe"
           frameborder="0"
           scrolling="no"
-          id="CixfVB6fljOxQsoT3Bab_1784041489749"
+          id="ldp9xYyX6UpQ38iToUvF_1784050903280"
         ></iframe>
       </div>
 
@@ -111,7 +111,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="booking__footer-copy">© {{ new Date().getFullYear() }} LÍNEA VIVA. Todos los derechos reservados.</p>
+      <p class="booking__footer-copy">© {{ new Date().getFullYear() }} EAT. Todos los derechos reservados.</p>
       <p class="booking__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 
