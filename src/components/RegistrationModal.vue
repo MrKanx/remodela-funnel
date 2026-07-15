@@ -193,6 +193,7 @@ const handleSubmit = async () => {
     pais: selectedCountry.value.name,
     zona: form.value.zona,
     paso: '1-registro-inicial',
+    tags: ['remodela-lead'],
     notas: buildNote(form.value, selectedCountry.value.name, pageDur),
     pageDuration: pageDur,
     source: 'REMODELA-web',

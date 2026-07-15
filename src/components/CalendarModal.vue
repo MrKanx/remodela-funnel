@@ -99,6 +99,7 @@ ${!disqualified ? '✅ CALIFICA' : '❌ NO CALIFICA'}
     visitaTecnica: form.value.visitaTecnica,
     requerimientos: form.value.requerimientos,
     cualifica: !disqualified,
+    tags: [!disqualified ? 'cualificado' : 'no-cualificado', 'remodela-lead'],
     notas: notasConTiempo,
     pageDuration: String(pageDuration),
     event_id: scheduleEventId,
