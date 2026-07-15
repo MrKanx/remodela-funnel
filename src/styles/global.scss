@@ -13,18 +13,24 @@ body {
   box-sizing: inherit; // Herencia controlada
 }
 
-/* Scrollbar personalizado */
+/* Scrollbar personalizado - Elegante */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: $QS-LIGHT; 
+  background: transparent; 
 }
 ::-webkit-scrollbar-thumb {
-  background: $QS-SURFACE;
-  border-radius: 5px;
-  border: 1px solid $QS-LIGHT;
+  background: rgba(#1A1A1A, 0.15); /* Subtle dark thumb */
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: $QS-GOLD;
+  background: rgba(#1A1A1A, 0.3);
+}
+
+/* Soporte Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(#1A1A1A, 0.15) transparent;
 }

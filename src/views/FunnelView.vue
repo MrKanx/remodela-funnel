@@ -66,7 +66,7 @@ onMounted(() => {
                 </button>
                 <span class="funnel__vsl-msg">Haz clic para ver el video gratis</span>
               </div>
-              <img src="https://fast.wistia.com/embed/medias/c0iw8b7y8t/swatch" class="funnel__vsl-thumb" alt="Video de la metodología" />
+              <img src="https://fast.wistia.com/embed/medias/mlqaxqjnvj/swatch" class="funnel__vsl-thumb" alt="Video de la metodología" />
             </div>
 
             <button class="funnel__cta" @click="openModal">
